@@ -1,6 +1,17 @@
 <template>
   <div>
       <v-container fluid>
+          <v-form>
+              <v-file-input
+                label="Selecione as legendas"
+                prepend-icon="mdi-message-text"
+                append-outer-icon="mdi-send"
+                outlined
+                multiple
+                chips
+                v-model="files"
+                @click:append-outer="processSubtitles" />            
+          </v-form>
           <div class="pills">
               <Pill v-for="word in groupedWords" :key="word.name"
                 :name="word.name" :amount="word.amount" />
@@ -21,16 +32,12 @@ export default {
                 { name: 'i', amount: 1234},
                 { name: 'you', amount: 900},
                 { name: 'he', amount: 853},
-                { name: 'i', amount: 1234},
-                { name: 'you', amount: 900},
-                { name: 'he', amount: 853},
-                { name: 'i', amount: 1234},
-                { name: 'you', amount: 900},
-                { name: 'he', amount: 853},
-                { name: 'i', amount: 1234},
-                { name: 'you', amount: 900},
-                { name: 'he', amount: 853},
             ]
+        }
+    },
+    methods: {
+        processSubtitles() {
+            console.log(this.files)
         }
     }
 }
