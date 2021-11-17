@@ -21,23 +21,24 @@
 </template>
 
 <script>
+import { ipcRenderer } from  'electron'
 import Pill from './Pill.vue'
 
 export default {
     components: { Pill },
-
     data: function() {
         return {
-            groupedWords: [
-                { name: 'i', amount: 1234},
-                { name: 'you', amount: 900},
-                { name: 'he', amount: 853},
-            ]
+            files: [],
+            groupedWords: []
         }
     },
     methods: {
         processSubtitles() {
-            console.log(this.files)
+            const paths = this.files.map(f => f.path)
+            ipcRenderer.send('process-subtitles', paths)
+            ipcRenderer.on('process-subtitles', (event, resp) => {
+                this.groupedWords = resp
+            })
         }
     }
 }
