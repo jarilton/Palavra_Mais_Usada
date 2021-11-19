@@ -5,7 +5,7 @@ module.exports = words => {
             // { ana: 3, bia: 2 } 
             // ['ana', 'bia']
 
-            const groupedWords = Workes.reduce((obj, word) => {
+            const groupedWords = words.reduce((obj, word) => {
                 if(obj[word]) {
                     obj[word] = obj[word] + 1
                 } else {
